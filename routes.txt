@@ -1,0 +1,22 @@
++--------+-----------+---------------------+---------------+------------------------------------------------------------+------------------------------------------+
+| Domain | Method    | URI                 | Name          | Action                                                     | Middleware                               |
++--------+-----------+---------------------+---------------+------------------------------------------------------------+------------------------------------------+
+|        | GET|HEAD  | /                   |               | Closure                                                    | web                                      |
+|        | POST      | api/login           | login.api     | App\Http\Controllers\Api\Auth\LoginController@login        | api                                      |
+|        | GET|HEAD  | api/logout          | logout.api    | App\Http\Controllers\Api\UserController@logout             | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | POST      | api/register        | register.api  | App\Http\Controllers\Api\Auth\RegisterController@register  | api                                      |
+|        | GET|HEAD  | api/tasks           | tasks.index   | App\Http\Controllers\Api\TaskController@index              | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | POST      | api/tasks           | tasks.store   | App\Http\Controllers\Api\TaskController@store              | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | GET|HEAD  | api/tasks/{task}    | tasks.show    | App\Http\Controllers\Api\TaskController@show               | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | PUT|PATCH | api/tasks/{task}    | tasks.update  | App\Http\Controllers\Api\TaskController@update             | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | DELETE    | api/tasks/{task}    | tasks.destroy | App\Http\Controllers\Api\TaskController@destroy            | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | GET|HEAD  | api/user            | user.api      | App\Http\Controllers\Api\UserController@userData           | api                                      |
+|        |           |                     |               |                                                            | App\Http\Middleware\Authenticate:sanctum |
+|        | GET|HEAD  | sanctum/csrf-cookie |               | Laravel\Sanctum\Http\Controllers\CsrfCookieController@show | web                                      |
++--------+-----------+---------------------+---------------+------------------------------------------------------------+------------------------------------------+
