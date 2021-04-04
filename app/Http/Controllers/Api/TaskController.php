@@ -20,12 +20,16 @@ class TaskController extends Controller
      */
     public function index():TaskResourceCollection
     {
+        if(!Auth::user()) {
+            abort('404');
+        }
+
         $userId = Auth::user()->id;
-
-        $user = User::find($userId);
         
-        $tasks = $user->tasks();
-
+        $tasks = Task::with('users')
+        ->where('user_id', $userId)
+        ->get();
+        
         return new TaskResourceCollection($tasks);
     }
 
@@ -39,8 +43,14 @@ class TaskController extends Controller
      */
     public function store(TaskStoreRequest $taskStoreRequest)
     {
-        $task = Task::create($taskStoreRequest->all());
+        if(!Auth::user()) {
+            abort('404');
+        }
 
+        $userId = Auth::user()->id;
+        
+        $task = Task::create(array_merge($taskStoreRequest->all(), ['user_id' => $userId]));
+        
         return new TaskResource($task);
     }
 
@@ -52,6 +62,10 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        if(!Auth::user()) {
+            abort('404');
+        }
+
         return new TaskResource($task);
     }
 
@@ -65,6 +79,10 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task): TaskResource
     {
+        if(!Auth::user()) {
+            abort('404');
+        }
+
         $task->update($request->all());
 
         return new TaskResource($task);
@@ -78,6 +96,10 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        if(!Auth::user()) {
+            abort('404');
+        }
+        
         $task->delete();
 
         return response()->json();

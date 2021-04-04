@@ -22,11 +22,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/logout', 'App\Http\Controllers\Api\UserController@logout')->name('logout.api');
     Route::get('/user', 'App\Http\Controllers\Api\UserController@userData')->name('user.api');
 
-    
+    Route::apiResource('tasks', 'App\Http\Controllers\Api\TaskController');
 });
 
 Route::post('/register', 'App\Http\Controllers\Api\Auth\RegisterController@register')->name('register.api');
 Route::post('/login', 'App\Http\Controllers\Api\Auth\LoginController@login')->name('login.api');
 
-
-Route::apiResource('tasks', 'App\Http\Controllers\Api\TaskController');

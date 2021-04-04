@@ -26,7 +26,7 @@ class TaskStoreRequest extends FormRequest
         return [
             'title'       => 'required|min:5|max:19',
             'description' => 'max:200',
-            'user_id'     => 'required|integer'
+            // 'user_id'     => 'required|integer'
         ];
     }
 }
