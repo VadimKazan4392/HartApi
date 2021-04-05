@@ -18,39 +18,38 @@ class TaskController extends Controller
      *
      * @return TaskResourceCollection
      */
-    public function index():TaskResourceCollection
+    public function index(): TaskResourceCollection
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
 
         $userId = Auth::user()->id;
-        
+
         $tasks = Task::with('users')
-        ->where('user_id', $userId)
-        ->get();
-        
+            ->where('user_id', $userId)
+            ->get();
+
         return new TaskResourceCollection($tasks);
     }
-
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Requests\TaskRequest  $taskRequest
+     * @param \Illuminate\Http\Requests\TaskRequest $taskRequest
      * @return TaskResourse
      */
     public function store(TaskStoreRequest $taskStoreRequest)
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
 
         $userId = Auth::user()->id;
-        
+
         $task = Task::create(array_merge($taskStoreRequest->all(), ['user_id' => $userId]));
-        
+
         return new TaskResource($task);
     }
 
@@ -62,7 +61,7 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
 
@@ -73,13 +72,13 @@ class TaskController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Task $task
+     * @param \Illuminate\Http\Request $request
+     * @param Task $task
      * @return TaskResource
      */
     public function update(Request $request, Task $task): TaskResource
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
 
@@ -91,15 +90,15 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
-        
+
         $task->delete();
 
         return response()->json();
