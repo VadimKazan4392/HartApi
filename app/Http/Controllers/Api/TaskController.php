@@ -22,9 +22,7 @@ class TaskController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $tasks = Task::with('users')
-            ->where('user_id', $userId)
-            ->get();
+        $tasks = Task::where('user_id', $userId)->get();
 
         return new TaskResourceCollection($tasks);
     }
@@ -40,7 +38,10 @@ class TaskController extends Controller
     {
         $userId = Auth::user()->id;
 
-        $task = Task::create(array_merge($taskStoreRequest->all(), ['user_id' => $userId]));
+        $task = new Task();
+        $task->user_id = $userId;
+        $task->fill($taskStoreRequest->all());
+        $task->save();
 
         return new TaskResource($task);
     }
@@ -53,7 +54,17 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
+        $this->validateIsAuthUserTask($task);
         return new TaskResource($task);
+    }
+
+    private function validateIsAuthUserTask(Task $task): bool
+    {
+        if ($task->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+
+        return true;
     }
 
 
@@ -66,6 +77,8 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task): TaskResource
     {
+        $this->validateIsAuthUserTask($task);
+
         $task->update($request->all());
 
         return new TaskResource($task);
@@ -79,6 +92,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
+        $this->validateIsAuthUserTask($task);
+
         $task->delete();
 
         return response()->json();
