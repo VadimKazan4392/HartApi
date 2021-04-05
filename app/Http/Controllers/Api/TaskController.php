@@ -18,39 +18,31 @@ class TaskController extends Controller
      *
      * @return TaskResourceCollection
      */
-    public function index():TaskResourceCollection
+    public function index(): TaskResourceCollection
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
-
         $userId = Auth::user()->id;
-        
-        $tasks = Task::with('users')
-        ->where('user_id', $userId)
-        ->get();
-        
+
+        $tasks = Task::where('user_id', $userId)->get();
+
         return new TaskResourceCollection($tasks);
     }
-
 
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Requests\TaskRequest  $taskRequest
+     * @param \Illuminate\Http\Requests\TaskRequest $taskRequest
      * @return TaskResourse
      */
     public function store(TaskStoreRequest $taskStoreRequest)
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
-
         $userId = Auth::user()->id;
-        
-        $task = Task::create(array_merge($taskStoreRequest->all(), ['user_id' => $userId]));
-        
+
+        $task = new Task();
+        $task->user_id = $userId;
+        $task->fill($taskStoreRequest->all());
+        $task->save();
+
         return new TaskResource($task);
     }
 
@@ -62,26 +54,30 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        if(!Auth::user()) {
-            abort('404');
+        $this->validateIsAuthUserTask($task);
+        return new TaskResource($task);
+    }
+
+    private function validateIsAuthUserTask(Task $task): bool
+    {
+        if ($task->user_id !== Auth::user()->id) {
+            abort(403);
         }
 
-        return new TaskResource($task);
+        return true;
     }
 
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Task $task
+     * @param \Illuminate\Http\Request $request
+     * @param Task $task
      * @return TaskResource
      */
     public function update(Request $request, Task $task): TaskResource
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
+        $this->validateIsAuthUserTask($task);
 
         $task->update($request->all());
 
@@ -91,15 +87,13 @@ class TaskController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Task $task)
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
-        
+        $this->validateIsAuthUserTask($task);
+
         $task->delete();
 
         return response()->json();
