@@ -18,18 +18,16 @@ class TaskController extends Controller
      *
      * @return TaskResourceCollection
      */
-    public function index():TaskResourceCollection
+    public function index(): TaskResourceCollection
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
 
         $userId = Auth::user()->id;
-        
-        $tasks = Task::with('users')
-        ->where('user_id', $userId)
-        ->get();
-        
+
+        $tasks = Task::where('user_id', $userId)->get();
+
         return new TaskResourceCollection($tasks);
     }
 
@@ -43,14 +41,17 @@ class TaskController extends Controller
      */
     public function store(TaskStoreRequest $taskStoreRequest)
     {
-        if(!Auth::user()) {
+        if (!Auth::user()) {
             abort('404');
         }
 
         $userId = Auth::user()->id;
-        
-        $task = Task::create(array_merge($taskStoreRequest->all(), ['user_id' => $userId]));
-        
+
+        $task = new Task();
+        $task->user_id = $userId;
+        $task->fill($taskStoreRequest->all());
+        $task->save();
+
         return new TaskResource($task);
     }
 
@@ -62,11 +63,18 @@ class TaskController extends Controller
      */
     public function show(Task $task)
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
+        $this->validateAuthUserTask($task);
 
         return new TaskResource($task);
+    }
+
+    private function validateAuthUserTask($task)
+    {
+        if ($task->user_id !== Auth::user()->id) {
+            abort(403);
+        }
+
+        return true;
     }
 
 
@@ -79,9 +87,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task): TaskResource
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
+        $this->validateAuthUserTask($task);
 
         $task->update($request->all());
 
@@ -96,10 +102,8 @@ class TaskController extends Controller
      */
     public function destroy(Task $task)
     {
-        if(!Auth::user()) {
-            abort('404');
-        }
-        
+        $this->validateAuthUserTask($task);
+
         $task->delete();
 
         return response()->json();

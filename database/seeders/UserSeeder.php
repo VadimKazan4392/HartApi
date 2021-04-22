@@ -19,13 +19,13 @@ class UserSeeder extends Seeder
         $users[] = [
             'name' => 'jack',
             'email' => 'email@mail.ru',
-            'password' => 123,
+            'password' => bcrypt(123),
         ];
 
         $users[] = [
             'name' => 'john',
             'email' => 'sfs@sfw.ru',
-            'password'=> 123
+            'password'=> bcrypt(123)
         ];
         DB::table('users')->insert($users);
     }
