@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TaskStoreRequest;
 use App\Http\Resources\TaskResource;
@@ -19,7 +18,7 @@ class TaskController extends Controller
      * @return TaskResourceCollection
      */
     public function index(): TaskResourceCollection
-    {
+    {   
         if (!Auth::user()) {
             abort('404');
         }
@@ -27,6 +26,7 @@ class TaskController extends Controller
         $userId = Auth::user()->id;
 
         $tasks = Task::where('user_id', $userId)->get();
+        dd($tasks);
 
         return new TaskResourceCollection($tasks);
     }
