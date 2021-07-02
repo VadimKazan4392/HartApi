@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="pahan">
     <navbar />
     <div class="container">
       <router-view />
@@ -16,7 +16,13 @@ export default {
 </script>
 
 <style scoped>
+.pahan {
+  background-color: rgb(231, 240, 231);
+  min-height: 500px;
+}
 .container {
-    margin-top: 70px;
+    margin-top: 56px;
+    padding-top: 20px;
+    
 }
 </style>

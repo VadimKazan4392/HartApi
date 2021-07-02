@@ -10,7 +10,10 @@
       </ul>
       <div>
         <template v-if="authentificated">
-          {{user.name}}  Logout
+          <span class="user">
+            {{user.name}}
+          </span>
+          <a href="#" @click.prevent="signOut" class="btn btn-outline-success my-2 my-sm-0">Sign out</a>
         </template>
         <template v-else>
           <ul class="navbar-nav mr-auto">
@@ -29,19 +32,19 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
     return {
       links: [
         {
-          title: "About",
-          href: "/about",
+          title: "StartPage",
+          href: "/",
         },
         {
-          title: "Home",
-          href: "/",
+          title: "Tasks",
+          href: "/start",
         },
       ],
       buttons: [
@@ -56,17 +59,37 @@ export default {
       ],
     };
   },
+
   computed: {
     ...mapGetters({
       authentificated: "auth/authentificated",
       user: "auth/user",
     }),
   },
+
+  methods: {
+    ...mapActions({
+      signOutAction: 'auth/signOut'
+    }),
+
+    signOut() {
+      this.signOutAction().then(() => {
+        this.$router.replace({
+          name: 'start'
+        })
+      })
+    }
+  }
 };
 </script>
 
 <style scoped>
 .btn-outline-success {
   margin-left: 20px;
+}
+
+.user {
+  color: beige;
+  font-size: 25px;
 }
 </style>

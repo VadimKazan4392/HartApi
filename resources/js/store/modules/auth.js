@@ -8,29 +8,39 @@ export default {
         user: null
     },
     actions: {
-        async signIn({dispatch}, credentials) {
+        async signIn({ dispatch }, credentials) {
             let response = await axios.post('http://laravel.api/api/login', credentials)
-            
-           return dispatch('attempt', response.data.access_token)
+
+            return dispatch('attempt', response.data.access_token)
         },
 
-        async attempt({commit}, token) {
-            commit('SET_TOKEN', token)
+        async attempt({ commit, state }, token) {
+            if (token) {
+                commit('SET_TOKEN', token)
+            }
 
-            try{
-                let response = await axios.get('http://laravel.api/api/user',
-                {
-                    headers: {
-                        'Authorization' : 'Bearer ' + token
-                    }
-                })
+            if (!state.token) {
+                return
+            }
+
+            try {
+                let response = await axios.get('http://laravel.api/api/user')
 
                 commit('SET_USER', response.data)
-            } catch(e) {
+            } catch (e) {
                 commit('SET_TOKEN', null)
                 commit('SET_USER', null)
             }
         },
+
+        async signOut({ commit }) {
+            return axios.get('http://laravel.api/api/logout').then(
+                () => {
+                    commit('SET_TOKEN', null)
+                    commit('SET_USER', null)
+                }
+            )
+        }
 
     },
     mutations: {

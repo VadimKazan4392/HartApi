@@ -1,28 +1,19 @@
 <template>
-<div >
-    <div v-for="post in allPosts" :key="post.id">
-        <div class="row">
-            <h3>{{post.title}}</h3>
-            <p>{{post.body}}</p>
-        </div> 
-    </div>
-</div>
+  <div>
+      <task-input></task-input>
+      <task-list></task-list>
+  </div>
 </template>
 
 
 <script>
 
-import {mapGetters, mapActions} from 'vuex'
+import TaskInput from './TaskInput.vue'
+import TaskList from './TaskList.vue'
 
 export default {
-    computed: mapGetters(["allPosts"]),
-
-    methods: mapActions(["fetchPosts"]),
-
-    mounted() {
-        this.fetchPosts()
-    }
-}
+    components:{TaskInput, TaskList},
+};
 </script>
 
 <style scoped>

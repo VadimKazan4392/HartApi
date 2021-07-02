@@ -19,7 +19,7 @@ window.Vue = require('vue').default;
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('app', require('./components/App.vue').default);
+// Vue.component('app', require('./components/App.vue').default);
 
 
 /**
@@ -29,9 +29,15 @@ Vue.component('app', require('./components/App.vue').default);
  */
 import store from './store'
 import router from './router'
+import App from './components/App.vue'
 
-const app = new Vue({
-    el: '#app',
-    store,
-    router
-});
+require('./store/subscriber')
+
+store.dispatch('auth/attempt', localStorage.getItem('token')).then( () => {
+    console.log(App)
+    new Vue({
+        store,
+        router,
+        render: h => h(App)
+    }).$mount('#app')
+})

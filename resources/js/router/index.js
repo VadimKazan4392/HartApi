@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import RootComponent from '../components/content/RootComponent'
-import About from '../components/content/About'
+import StartPage from '../components/content/StartPage'
 import Login from '../components/auth/Login'
 import Register from '../components/auth/Register'
 
@@ -9,12 +9,13 @@ Vue.use(VueRouter)
 
 const routes = [
     {
-        name: 'about',
-        path: '/about',
-        component: About
+        name: 'start',
+        path: '/',
+        component: StartPage
     },
     {
-        path: '/',
+        name: 'tasks',
+        path: '/start',
         component: RootComponent
     },
     {
@@ -22,6 +23,7 @@ const routes = [
         component: Register
     },
     {
+        name: 'login',
         path: '/login',
         component: Login
     }

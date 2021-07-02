@@ -25,8 +25,7 @@ class TaskController extends Controller
 
         $userId = Auth::user()->id;
 
-        $tasks = Task::where('user_id', $userId)->get();
-        dd($tasks);
+        $tasks = Task::where('user_id', $userId)->orderBy('id','DESC')->get();
 
         return new TaskResourceCollection($tasks);
     }

@@ -39,7 +39,7 @@ export default {
     submit() {
       this.signIn(this.form).then( () => {
         this.$router.replace({
-          name: 'about'
+          name: 'tasks'
         })
       })
       .catch( () => {
