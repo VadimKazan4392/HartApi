@@ -10,7 +10,7 @@ export default {
     actions: {
         async fetchTasks(context) {
             const token = this.state.auth.token
-            await axios.get('https://laravel-api-for-hart-digital.herokuapp.com/tasks', {headers: {
+            await axios.get('https://laravel-api-for-hart-digital.herokuapp.com/api/tasks', {headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }})
@@ -21,7 +21,7 @@ export default {
         },
 
         async addTask(context, credentials) {
-            await axios.post('https://laravel-api-for-hart-digital.herokuapp.com/tasks', credentials)
+            await axios.post('https://laravel-api-for-hart-digital.herokuapp.com/api/tasks', credentials)
             .then(response => {
                 const tsk = response.data.data
                 context.commit('createTask', tsk)
@@ -30,14 +30,14 @@ export default {
         },
 
         async destroyTask(context, credentials) {
-            await axios.delete('https://laravel-api-for-hart-digital.herokuapp.com/tasks/' + credentials)
+            await axios.delete('https://laravel-api-for-hart-digital.herokuapp.com/api/tasks/' + credentials)
             .then(() => {
                 context.commit('deleteTask', credentials)
             })
         },
         
         updateChe(context, credentials) {
-            axios.patch('https://laravel-api-for-hart-digital.herokuapp.com/tasks/' + credentials.id, credentials)
+            axios.patch('https://laravel-api-for-hart-digital.herokuapp.com/api/tasks/' + credentials.id, credentials)
         }
     },
 
