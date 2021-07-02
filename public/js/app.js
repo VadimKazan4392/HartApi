@@ -2574,7 +2574,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 dispatch = _ref.dispatch;
                 _context.next = 3;
-                return axios.post('http://laravel.api/api/login', credentials);
+                return axios.post('https://laravel-api-for-hart-digital.herokuapp.com/login', credentials);
 
               case 3:
                 response = _context.sent;
@@ -2611,7 +2611,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 4:
                 _context2.prev = 4;
                 _context2.next = 7;
-                return axios.get('http://laravel.api/api/user');
+                return axios.get('https://laravel-api-for-hart-digital.herokuapp.com/user');
 
               case 7:
                 response = _context2.sent;
@@ -2641,7 +2641,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 commit = _ref3.commit;
-                return _context3.abrupt("return", axios.get('http://laravel.api/api/logout').then(function () {
+                return _context3.abrupt("return", axios.get('https://laravel-api-for-hart-digital.herokuapp.com/logout').then(function () {
                   commit('SET_TOKEN', null);
                   commit('SET_USER', null);
                 }));
@@ -2691,7 +2691,7 @@ __webpack_require__.r(__webpack_exports__);
   state: {},
   actions: {
     signUp: function signUp(_, credentials) {
-      axios.post('http://laravel.api/api/register', credentials).then(function (response) {
+      axios.post('https://laravel-api-for-hart-digital.herokuapp.com/register', credentials).then(function (response) {
         response.data;
       });
     }
@@ -2741,7 +2741,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               case 0:
                 token = _this.state.auth.token;
                 _context.next = 3;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('http://laravel.api/api/tasks', {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().get('https://laravel-api-for-hart-digital.herokuapp.com/tasks', {
                   headers: {
                     'Content-Type': 'application/json',
                     'Authorization': "Bearer ".concat(token)
@@ -2766,7 +2766,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context2.prev = _context2.next) {
               case 0:
                 _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('http://laravel.api/api/tasks', credentials).then(function (response) {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().post('https://laravel-api-for-hart-digital.herokuapp.com/tasks', credentials).then(function (response) {
                   var tsk = response.data.data;
                   context.commit('createTask', tsk);
                   context.commit('updateTasks', state.tasks);
@@ -2787,7 +2787,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_1___default().delete('http://laravel.api/api/tasks/' + credentials).then(function () {
+                return axios__WEBPACK_IMPORTED_MODULE_1___default().delete('https://laravel-api-for-hart-digital.herokuapp.com/tasks/' + credentials).then(function () {
                   context.commit('deleteTask', credentials);
                 });
 
@@ -2800,7 +2800,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       }))();
     },
     updateChe: function updateChe(context, credentials) {
-      axios__WEBPACK_IMPORTED_MODULE_1___default().patch('http://laravel.api/api/tasks/' + credentials.id, credentials);
+      axios__WEBPACK_IMPORTED_MODULE_1___default().patch('https://laravel-api-for-hart-digital.herokuapp.com/tasks/' + credentials.id, credentials);
     }
   },
   mutations: {
