@@ -34,7 +34,6 @@ import App from './components/App.vue'
 require('./store/subscriber')
 
 store.dispatch('auth/attempt', localStorage.getItem('token')).then( () => {
-    console.log(App)
     new Vue({
         store,
         router,

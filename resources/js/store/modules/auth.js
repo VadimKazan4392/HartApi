@@ -41,7 +41,6 @@ export default {
                 }
             )
         }
-
     },
     mutations: {
         SET_TOKEN(state, token) {

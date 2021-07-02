@@ -2268,22 +2268,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       input: {
-        title: '',
-        description: ''
+        title: "",
+        description: "",
+        status: false
       }
     };
   },
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
-    addTask: 'task/addTask'
+    addTask: "task/addTask"
   })), {}, {
     submit: function submit() {
       this.addTask(this.input);
-      this.input = '';
+      this.$refs.anyName.reset();
     }
   })
 });
@@ -2403,7 +2414,6 @@ window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js"
 __webpack_require__(/*! ./store/subscriber */ "./resources/js/store/subscriber.js");
 
 _store__WEBPACK_IMPORTED_MODULE_0__.default.dispatch('auth/attempt', localStorage.getItem('token')).then(function () {
-  console.log(_components_App_vue__WEBPACK_IMPORTED_MODULE_2__.default);
   new Vue({
     store: _store__WEBPACK_IMPORTED_MODULE_0__.default,
     router: _router__WEBPACK_IMPORTED_MODULE_1__.default,
@@ -40574,6 +40584,7 @@ var render = function() {
       _c(
         "form",
         {
+          ref: "anyName",
           staticClass: "col-md-7",
           on: {
             submit: function($event) {
