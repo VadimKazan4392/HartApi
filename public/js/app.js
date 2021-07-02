@@ -2691,7 +2691,7 @@ __webpack_require__.r(__webpack_exports__);
   state: {},
   actions: {
     signUp: function signUp(_, credentials) {
-      axios.post('https://laravel-api-for-hart-digital.herokuapp.com/register', credentials).then(function (response) {
+      axios.post('https://laravel-api-for-hart-digital.herokuapp.com/api/register', credentials).then(function (response) {
         response.data;
       });
     }
