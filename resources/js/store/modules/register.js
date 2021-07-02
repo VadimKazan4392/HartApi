@@ -4,7 +4,7 @@ export default {
     state: {},
     actions: {
         signUp(_, credentials) {
-            axios.post('http://laravel.api/api/register', credentials)
+            axios.post('https://laravel-api-for-hart-digital.herokuapp.com/register', credentials)
             .then(response => {
                 response.data
             })

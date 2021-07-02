@@ -9,7 +9,7 @@ export default {
     },
     actions: {
         async signIn({ dispatch }, credentials) {
-            let response = await axios.post('http://laravel.api/api/login', credentials)
+            let response = await axios.post('https://laravel-api-for-hart-digital.herokuapp.com/login', credentials)
 
             return dispatch('attempt', response.data.access_token)
         },
@@ -24,7 +24,7 @@ export default {
             }
 
             try {
-                let response = await axios.get('http://laravel.api/api/user')
+                let response = await axios.get('https://laravel-api-for-hart-digital.herokuapp.com/user')
 
                 commit('SET_USER', response.data)
             } catch (e) {
@@ -34,7 +34,7 @@ export default {
         },
 
         async signOut({ commit }) {
-            return axios.get('http://laravel.api/api/logout').then(
+            return axios.get('https://laravel-api-for-hart-digital.herokuapp.com/logout').then(
                 () => {
                     commit('SET_TOKEN', null)
                     commit('SET_USER', null)
