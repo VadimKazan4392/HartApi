@@ -38,6 +38,7 @@ export default {
                 () => {
                     commit('SET_TOKEN', null)
                     commit('SET_USER', null)
+                    
                 }
             )
         }

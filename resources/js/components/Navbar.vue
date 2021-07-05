@@ -1,5 +1,8 @@
 <template>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExample03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item" v-for="link in links" :key="link.title">
@@ -86,6 +89,7 @@ export default {
 <style scoped>
 .btn-outline-success {
   margin-left: 20px;
+  padding: 5px;
 }
 
 .user {

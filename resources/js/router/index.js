@@ -19,6 +19,7 @@ const routes = [
         component: RootComponent
     },
     {
+        name: 'register',
         path: '/register',
         component: Register
     },

@@ -1926,6 +1926,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2502,6 +2505,7 @@ var routes = [{
   path: '/start',
   component: _components_content_RootComponent__WEBPACK_IMPORTED_MODULE_0__.default
 }, {
+  name: 'register',
   path: '/register',
   component: _components_auth_Register__WEBPACK_IMPORTED_MODULE_3__.default
 }, {
@@ -7353,7 +7357,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-outline-success[data-v-6dde423b] {\n  margin-left: 20px;\n}\n.user[data-v-6dde423b] {\n  color: beige;\n  font-size: 25px;\n}\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.btn-outline-success[data-v-6dde423b] {\n  margin-left: 20px;\n  padding: 5px;\n}\n.user[data-v-6dde423b] {\n  color: beige;\n  font-size: 25px;\n}\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -39976,6 +39980,8 @@ var render = function() {
     "nav",
     { staticClass: "navbar navbar-expand-md navbar-dark fixed-top bg-dark" },
     [
+      _vm._m(0),
+      _vm._v(" "),
       _c(
         "div",
         {
@@ -40065,7 +40071,28 @@ var render = function() {
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      {
+        staticClass: "navbar-toggler",
+        attrs: {
+          type: "button",
+          "data-toggle": "collapse",
+          "data-target": "#navbarsExampleDefault",
+          "aria-controls": "navbarsExample03",
+          "aria-expanded": "false",
+          "aria-label": "Toggle navigation"
+        }
+      },
+      [_c("span", { staticClass: "navbar-toggler-icon" })]
+    )
+  }
+]
 render._withStripped = true
 
 
