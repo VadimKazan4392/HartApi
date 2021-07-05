@@ -40708,7 +40708,7 @@ var render = function() {
     _vm._l(_vm.allTasks, function(task) {
       return _c("div", { key: task.id, staticClass: "list-group-item" }, [
         _c("div", { staticClass: "row" }, [
-          _c("span", { staticClass: "col-1" }, [
+          _c("span", { staticClass: "col-md-1" }, [
             _c("input", {
               directives: [
                 {
@@ -40755,19 +40755,19 @@ var render = function() {
             })
           ]),
           _vm._v(" "),
-          _c("span", { staticClass: "col-3" }, [
+          _c("span", { staticClass: "col-md-3" }, [
             _c("span", { class: [task.status ? "complited" : ""] }, [
               _vm._v(_vm._s(task.title))
             ])
           ]),
           _vm._v(" "),
-          _c("span", { staticClass: "col-6" }, [
+          _c("span", { staticClass: "col-md-6" }, [
             _c("span", { class: [task.status ? "complited" : ""] }, [
               _vm._v(_vm._s(task.description))
             ])
           ]),
           _vm._v(" "),
-          _c("span", { staticClass: "col-1" }, [
+          _c("span", { staticClass: "col-md-1" }, [
             _c(
               "button",
               {

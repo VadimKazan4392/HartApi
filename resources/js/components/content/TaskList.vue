@@ -2,16 +2,16 @@
   <div class="taskList">
     <div v-for="task in allTasks" :key="task.id" class="list-group-item">
       <div class="row">
-        <span class="col-1">
+        <span class="col-md-1">
           <input type="checkbox" @change="complite(task)" v-model="task.status"/>
         </span>
-        <span class="col-3">
+        <span class="col-md-3">
           <span :class="[task.status ? 'complited' : '']">{{ task.title }}</span>
         </span>
-        <span class="col-6">
+        <span class="col-md-6">
           <span :class="[task.status ? 'complited' : '']">{{ task.description }}</span>
         </span>
-        <span class="col-1">
+        <span class="col-md-1">
           <button
             @click="destroy(task.id)"
             type="submit"
